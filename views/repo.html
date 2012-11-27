@@ -1,0 +1,16 @@
+<h2>Current Status</h2>
+
+<div id="current" class="events">
+  {{#events_latest}}
+    {{> event}}
+  {{/events_latest}}
+</div>
+<br/>
+
+<h2>History for {{repository}}</h2>
+<div id="history" class="events">
+  {{#events}}
+    {{> event}}
+  {{/events}}
+</div>
+
