@@ -52,7 +52,7 @@ function addRevisionGroups(events) {
 	var group = 0;
 	events.forEach(function(event) {
 		if (!groups[event.revision])
-			groups[event.revision] = group++;
+			groups[event.revision] = ++group;
 		extend(event, { revision_group : group});
 	});
 	return events;
