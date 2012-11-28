@@ -16,7 +16,6 @@ exports.index = function(req, res) {
 			}
 		})
 	};
-	console.log(model);
 	view(res, "index", model);
 }
 
@@ -41,11 +40,21 @@ exports.repo = function(req, res) {
 function getLatestEvents(repo, filter) {
 	var events = {};
 	getEvents(repo, filter).reverse().forEach(function (event) {
-		console.log(event);
 		events[event.type + "/" + event.remote + "/" + event.branch] = event;
 	});
 	events = values(events);
 	sortEvents(events);
+	return addRevisionGroups(events);
+}
+
+function addRevisionGroups(events) {
+	var groups = {};
+	var group = 0;
+	events.forEach(function(event) {
+		if (!groups[event.revision])
+			groups[event.revision] = group++;
+		extend(event, { revision_group : group});
+	});
 	return events;
 }
 
@@ -63,7 +72,7 @@ function getEvents(repo, filter) {
 		events_new.push(event_new);
 	});
 	sortEvents(events_new);
-	return events_new;
+	return addRevisionGroups(events_new);
 }
 
 function values(hash) {

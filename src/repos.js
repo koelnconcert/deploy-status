@@ -61,7 +61,6 @@ function getDeployments(repo) {
 	    			revision : revision,
 	    			remote : remote,
 			    } 
-			    
 			    if (isTag) {
 			    	if (name.match(/^deployed-(current|last)$/))
 			    		continue;
