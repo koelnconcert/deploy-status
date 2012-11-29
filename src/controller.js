@@ -43,7 +43,7 @@ function getLatestEvents(repo, filter) {
 		events[event.type + "/" + event.remote + "/" + event.branch] = event;
 	});
 	events = values(events);
-	sortEvents(events);
+	events.sort(eventSorter);
 	return addRevisionGroups(events);
 }
 
@@ -71,7 +71,7 @@ function getEvents(repo, filter) {
 		});
 		events_new.push(event_new);
 	});
-	sortEvents(events_new);
+	events_new.sort(eventSorter);
 	return addRevisionGroups(events_new);
 }
 
@@ -109,8 +109,8 @@ exports.diff = function(req, res) {
 	});
 }
 
-function sortEvents(events) {
-	events.sort(function(a,b) { return b.date.localeCompare(a.date); });
+function eventSorter(a,b) {
+	return b.date.localeCompare(a.date);
 }
 
 var global_partials = {
