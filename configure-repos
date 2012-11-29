@@ -10,11 +10,7 @@ for conf_file in $conf_dir/*; do
   mkdir -p $repo_dir
   pushd $repo_dir >/dev/null
 
-  remotes=`echo $config | underscore extract remotes | underscore --outfmt text keys`
-  
-  if [ ! -d ".git" ]; then
-    git init
-  fi
+  git init -q --bare
 
   remotes=`echo $config | underscore extract remotes | underscore --outfmt text keys`
 

@@ -28,7 +28,7 @@ function getRepositories() {
 		var repo = {
 			name : name,
 			config : config,
-			git : new Git({'git-dir' : repo_dir + '/.git'})
+			git : new Git({'git-dir' : repo_dir})
 		};
 		repos[name] = repo;
 		repo.refresh = function(callback) {
