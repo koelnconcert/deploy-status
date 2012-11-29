@@ -10,13 +10,13 @@ var repos = {};
 function init() {
 	console.log("checking repos...");
 	getRepositories();
-	console.log(repos);
+//	console.log(repos);
 	module.exports = repos;
 }
 
 function getRepositories() {
 	fs.readdirSync(conf_dir).forEach(function (name) {
-		console.log(name);
+//		console.log(name);
 		if (name.match(/^\./))
 			return;
 
@@ -24,7 +24,7 @@ function getRepositories() {
 		console.log("initalising repo '" + name + "'");
 		var config_file = fs.readFileSync(conf_dir + "/" + name, "UTF-8");
 		var config = JSON.parse(config_file);
-		console.log(config);
+//		console.log(config);
 		var repo = {
 			name : name,
 			config : config,
