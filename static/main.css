@@ -14,6 +14,14 @@ input[disabled] {
     color: #FFAA00;
 }
 
+.diff .addline {
+    color: green;
+}
+
+.diff .delline {
+    color: red;
+}
+
 #current .event {
     float: left;
     margin: 5px;

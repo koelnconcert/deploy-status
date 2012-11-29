@@ -1,6 +1,7 @@
 function init() {
 	addDiffButtons();
 	colorizeLogs();
+	colorizeDiff();
 }
 
 function addDiffButtons() {
@@ -31,11 +32,21 @@ function colorizeLogs() {
 		var log = $(elem);
 		var rev1 = log.data("rev1").substr(0,7);
 		var rev2 = log.data("rev2").substr(0,7);
-		var html = log.html();
-		html = html.replace(rev1, '<span class="rev1">' + rev1 + '</span>');
-		html = html.replace(rev2, '<span class="rev2">' + rev2 + '</span>');
-		log.html(html);
+		replaceHtml(log, rev1, '<span class="rev1">' + rev1 + '</span>');
+		replaceHtml(log, rev2, '<span class="rev2">' + rev2 + '</span>');
 	})
+}
+
+function replaceHtml(elem, search, newvalue) {
+	elem.html(elem.html().replace(search, newvalue));
+}
+
+function colorizeDiff() {
+	$(".diff").each(function(idx, elem) {
+		var diff = $(elem);
+		replaceHtml(diff, /(^\+.*)/mg, "<span class='addline'>$1</span>");
+		replaceHtml(diff, /(^-.*)/mg, "<span class='delline'>$1</span>");
+	});
 }
 
 $(document).ready(init);
