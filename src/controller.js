@@ -37,7 +37,7 @@ exports.repo = function(req, res) {
 		events : getEvents(repo, filter),
 		events_latest : getLatestEvents(repo, filter),
 	}
-	view(res, "repo", model);
+	view(res, remote?"remote":"repo", model);
 }
 
 function getLatestEvents(repo, filter) {

@@ -1,5 +1,24 @@
+h1, h2, h3, .current .event {
+    background-color: #CCCCCC;
+    padding: 5px;
+    margin: 0px 10px 10px 0px;
+    border-radius: 10px;
+}
+
+h1 a, h2 a, h3 a {
+    color: black !important;
+}
+
 h1 {
-    color:red;
+    border-left: 10px solid #000000;
+}
+
+h2 {
+    border-left: 10px solid #555555;
+}
+
+h3 {
+    border-left: 10px solid #999999;
 }
 
 input[disabled] {
@@ -7,11 +26,11 @@ input[disabled] {
 }
 
 .rev1 {
-    color: #00AA00;
+    color: green;
 }
 
 .rev2 {
-    color: #FFAA00;
+    color: red;
 }
 
 .diff .addline {
@@ -22,28 +41,25 @@ input[disabled] {
     color: red;
 }
 
-#current .event {
+.current .event {
     float: left;
-    margin: 5px;
     text-align: center;
-    padding: 5px;
-    background-color: #CCCCCC;
-    width: 130px;
-    border-radius: 10px;
+    width: 22ex;
 }
 
-#current .event > span {
+.current .event > span {
     display: block;
 }
 
-#current .repo {
+.current .repo {
     font-size: large;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-a {
+a, a:visited {
     text-decoration: none;
+    color: blue;
 }
 
 a:hover {
@@ -54,20 +70,20 @@ br {
     clear: both;
 }
 
-#history {
+.history {
     display: table;
 }
 
-#history > div {
+.history > div {
     display: table-row;
 }
 
-#history > div > span {
+.history > div > span {
     display: table-cell;
     padding: 3px;
 }
 
-#history .repo {
+.history .repo {
     display: none;
 }
 

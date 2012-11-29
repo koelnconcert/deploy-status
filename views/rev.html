@@ -1,6 +1,8 @@
-<h2>History for {{repository}}, revision {{revision}}</h2>
-<div id="history" class="events">
-{{#events}}
-{{> event}}
-{{/events}}
+<h2><a href="../">Repository {{repository}}</a></h2>
+<h3>Revision {{revision}}</h2>
+
+<div class="history events">
+  {{#events}}
+    {{> event}}
+  {{/events}}
 </div>
