@@ -24,9 +24,8 @@ for conf_file in $conf_dir/*; do
  
     #  git remote rm $remote
     git config --remove-section remote.$remote 2> /dev/null
-    git remote add $remote $url
+    git remote add --no-tags $remote $url
     git config --add remote.$remote.fetch "+refs/tags/*:refs/tags/$remote/*"
-    git config remote.$remote.tagopt --no-tags
   done;
 
   git fetch --all --prune
