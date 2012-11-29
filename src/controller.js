@@ -7,15 +7,18 @@ exports.test = function(req, res) {
 }
 
 exports.index = function(req, res) {
-	var model = {
-		repos : values(repos).map(function(repo) {
-			return {
-				repository : repo.name,
-				repo_url : "/repo/" + repo.name,
-				events_latest : getLatestEvents(repo)
-			}
-		})
-	};
+	var repos_model = values(repos).map(function(repo) {
+		return {
+			repository : repo.name,
+			repo_url : "/repo/" + repo.name,
+			events_latest : getLatestEvents(repo)
+		}
+	});
+	repos_model.sort(function(a,b) {
+		return eventSorter(a.events_latest[0], b.events_latest[0]);
+	});
+
+	var model = { repos : repos_model };
 	view(res, "index", model);
 }
 
