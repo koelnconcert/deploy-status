@@ -114,9 +114,12 @@ exports.diff = function(req, res) {
 	};
 	repos[repo].git.exec("diff", [ rev1 + ".." + rev2], function (err, msg) {
 		model.diff = msg;
-		repos[repo].git.exec("log", ["--graph", "--boundary", "--format='%h [%cr] <%an> %s'", rev1 + "..." + rev2], function (err, msg) {
-			model.log = msg;
-			view(res, "diff", model);
+		repos[repo].git.exec("diff", [ "--stat", rev1 + ".." + rev2], function (err, msg) {
+			model.stat = msg;
+			repos[repo].git.exec("log", ["--graph", "--boundary", "--format='%h [%cr] <%an> %s'", rev1 + "..." + rev2], function (err, msg) {
+				model.log = msg;
+				view(res, "diff", model);
+			});
 		});
 	});
 }
@@ -132,7 +135,6 @@ var global_partials = {
 
 function view(res, view, data) {
 	data = data || {};
-	console.log("view: " + view);
 	res.format({
 		"text/html": function() {
 			data.partials = extend({}, global_partials, data.partials || {});
