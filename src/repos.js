@@ -16,6 +16,10 @@ function init() {
 
 function getRepositories() {
 	fs.readdirSync(conf_dir).forEach(function (name) {
+		console.log(name);
+		if (name.match(/^\./))
+			return;
+
 		var repo_dir = repo_base_dir + "/" + name;
 		console.log("initalising repo '" + name + "'");
 		var config_file = fs.readFileSync(conf_dir + "/" + name, "UTF-8");
