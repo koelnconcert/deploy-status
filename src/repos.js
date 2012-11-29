@@ -57,7 +57,10 @@ function getDeployments(repo) {
 			    var remote = groups[3];
 			    var name = groups[4];
 			    
-			    var config = repo.config.remotes[remote] || {};
+			    var config = repo.config.remotes[remote];
+			    if (config == undefined)
+			    	continue;
+
 			    var tag_filter = new RegExp(config.tags || null);
 			    var branch_filter = new RegExp(config.branch || null);
 			    
