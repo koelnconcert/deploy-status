@@ -2,6 +2,10 @@ h1 {
     color:red;
 }
 
+input[disabled] {
+    visibility: hidden;
+}
+
 #current .event {
     float: left;
     margin: 5px;
