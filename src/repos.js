@@ -3,7 +3,7 @@ var moment = require('moment');
 var Git = require('git-wrapper');
 
 var repo_base_dir = "repos";
-var config_file_name = "deploy-status.json";
+var conf_dir = "config";
 
 var repos = {};
 
@@ -15,10 +15,10 @@ function init() {
 }
 
 function getRepositories() {
-	fs.readdirSync(repo_base_dir).forEach(function (name) {
+	fs.readdirSync(conf_dir).forEach(function (name) {
 		var repo_dir = repo_base_dir + "/" + name;
 		console.log("initalising repo '" + name + "'");
-		var config_file = fs.readFileSync(repo_dir + "/" + config_file_name, "UTF-8");
+		var config_file = fs.readFileSync(conf_dir + "/" + name, "UTF-8");
 		var config = JSON.parse(config_file);
 		console.log(config);
 		var repo = {
