@@ -1,4 +1,9 @@
 function init() {
+	addDiffButtons();
+	colorizeLogs();
+}
+
+function addDiffButtons() {
 	$("input").change(function(event) {
 		var input = $(event.target);
 		var repo_url = input.data("repo-url");
@@ -19,6 +24,18 @@ function init() {
 			window.location.href=url;
 		}
 	});
+}
+
+function colorizeLogs() {
+	$(".log").each(function(idx, elem) {
+		var log = $(elem);
+		var rev1 = log.data("rev1").substr(0,7);
+		var rev2 = log.data("rev2").substr(0,7);
+		var html = log.html();
+		html = html.replace(rev1, '<span class="rev1">' + rev1 + '</span>');
+		html = html.replace(rev2, '<span class="rev2">' + rev2 + '</span>');
+		log.html(html);
+	})
 }
 
 $(document).ready(init);
