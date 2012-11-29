@@ -1,4 +1,4 @@
-h1, h2, h3, .current .event {
+h1, h2, h3, h4, .current .event {
     background-color: #CCCCCC;
     padding: 5px;
     margin: 0px 10px 10px 0px;
@@ -21,6 +21,19 @@ h3 {
     border-left: 10px solid #999999;
 }
 
+h4 {
+    border-left: 10px solid #BBBBBB;
+}
+
+pre h4 {
+    margin-top: 10px;
+    margin-left: -15px;
+}
+
+pre {
+    padding-left: 15px;
+}
+
 input[disabled] {
     visibility: hidden;
 }
@@ -39,6 +52,10 @@ input[disabled] {
 
 .diff .delline {
     color: red;
+}
+
+.diff .lines {
+    color: teal;
 }
 
 .current .event {
