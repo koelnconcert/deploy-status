@@ -46,11 +46,11 @@ function colorizeDiff() {
 	$(".diff").each(function(idx, elem) {
 		var diff = $(elem);
 		replaceHtml(diff, /\n(---|\+\+\+) .*?(?=\n)/g, "");
+		replaceHtml(diff, /^(@@.*@@)/mg, "<span class='lines'>$1</span>");
 		replaceHtml(diff, /^diff --git a\/(.*) b\/.*/mg, "<h4>$1</h4>");
 		replaceHtml(diff, /\nindex .*?\n/g, "");
 		replaceHtml(diff, /(^\+.*)/mg, "<span class='addline'>$1</span>");
 		replaceHtml(diff, /(^-.*)/mg, "<span class='delline'>$1</span>");
-		replaceHtml(diff, /^(@@.*@@)/mg, "<span class='lines'>$1</span>");
 	});
 }
 
