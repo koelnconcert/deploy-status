@@ -106,9 +106,10 @@ exports.diff = function(req, res) {
 	var repo = req.params.repo;
 	var rev1 = req.params.rev1;
 	var rev2 = req.params.rev2;
-	repos[repo].git.exec("log", ["--graph", "--oneline", rev1 + ".." + rev2], function (err, msg) {
-		console.log(msg);
-		res.render("index", { content : "<pre>" + msg + "</pre>"});
+//	repos[repo].git.exec("log", ["--graph", "--oneline", rev1 + ".." + rev2], function (err, msg) {
+	repos[repo].git.exec("diff", [ rev1 + ".." + rev2], function (err, msg) {
+//		console.log(msg);
+		res.render("template", { content : "<pre>" + msg + "</pre>"});
 	});
 }
 
