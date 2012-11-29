@@ -2,6 +2,8 @@ var extend = require("xtend");
 var moment = require("moment");
 var repos = require('./repos');
 
+var base_url = "/node/";
+
 exports.test = function(req, res) {
 	res.json(repos);
 }
@@ -9,8 +11,7 @@ exports.test = function(req, res) {
 exports.index = function(req, res) {
 	var repos_model = values(repos).map(function(repo) {
 		return {
-			repository : repo.name,
-			repo_url : "/repo/" + repo.name,
+			repo : repo.name,
 			events_latest : getLatestEvents(repo)
 		}
 	});
@@ -32,7 +33,7 @@ exports.repo = function(req, res) {
 		filter = (function(event) {	return event.remote == remote;	});
 	
 	var model = {
-		repository : repo_name,
+		repo : repo_name,
 		remote : remote,
 		events : getEvents(repo, filter),
 		events_latest : getLatestEvents(repo, filter),
@@ -94,7 +95,7 @@ exports.rev = function(req, res) {
 	});
 
 	var model = {
-		repository : repo_name,
+		repo : repo_name,
 		revision : rev,
 		events : events,
 	}
@@ -135,9 +136,11 @@ function view(res, view, data) {
 	res.format({
 		"text/html": function() {
 			data.partials = extend({}, global_partials, data.partials || {});
-			extend(data, { repo_url : "/repo/" + data.repository});
 			res.render(view, data, function(err, html) {
-				res.render("template", { content : html});
+				res.render("template", {
+					base_url : base_url,
+					content : html
+				});
 			})
 		},
 		"application/json": function() {res.json(data)}

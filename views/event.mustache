@@ -1,10 +1,10 @@
 <div class="event group{{revision_group}}">
-  <span class="repo"><a href="{{repo_url}}">{{repository}}</a></span>
+  <span class="repo"><a href="repo/{{repo}}">{{repo}}</a></span>
   <span class="date">{{date_short}}</span>
   <span class="type">{{type}} {{tag}}{{branch}}</span>
-  <span class="remote"><a href="{{repo_url}}/remote/{{remote}}">{{remote}}</a></span>
+  <span class="remote"><a href="repo/{{repo}}/remote/{{remote}}">{{remote}}</a></span>
   <span class="revision">
-    <input type="checkbox" data-repo-url="{{repo_url}}" value="{{revision}}"/>
-    <a href="{{repo_url}}/rev/{{revision}}">{{revision_short}}</a>
+    <input type="checkbox" data-repo="{{repo}}" value="{{revision}}"/>
+    <a href="repo/{{repo}}/rev/{{revision}}">{{revision_short}}</a>
   </span>
 </div>
