@@ -34,6 +34,7 @@ function colorizeLogs() {
 		var rev2 = log.data("rev2").substr(0,7);
 		replaceHtml(log, rev1, '<span class="rev1">' + rev1 + '</span>');
 		replaceHtml(log, rev2, '<span class="rev2">' + rev2 + '</span>');
+		replaceHtml(log, /\s+$/, "");
 	})
 }
 
