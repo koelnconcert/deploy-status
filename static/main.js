@@ -8,19 +8,19 @@ function addDiffButtons() {
 	$("input").change(function(event) {
 		var input = $(event.target);
 		var repo = input.data("repo");
-		var rev1 = input.val();
+		var rev = input.val();
 		var checked = $("input:checked");
 		if (checked.size() == 0) {
 			$("input").attr('disabled', false);
 		} else if (checked.size() == 1) {
 			$("input").filter(function(idx, input) {
 				var same_repo = $(input).data("repo") == repo;
-				var same_rev = $(input).val() == rev1;
+				var same_rev = $(input).val() == rev;
 				return !same_repo || same_rev;
 			}).not(input).attr('disabled', true);
 		} else if (checked.size() == 2) {
-			var rev2 = checked.not(input).val();
-			var url = "repo/" + repo + "/diff/" + rev1 + "/" + rev2;
+			var rev_other = checked.not(input).val();
+			var url = "repo/" + repo + "/diff/" + rev_other + "/" + rev;
 			checked.attr('checked', false); //clean for back button
 			window.location.href=url;
 		}
