@@ -19,7 +19,7 @@ for conf_file in $conf_dir/*; do
   remotes=`echo $config | underscore extract remotes | underscore --outfmt text keys`
 
   for remote in $remotes; do 
-    url=`echo $config | underscore --outfmt text extract remotes.$remote.url`
+    url=`echo $config | underscore --outfmt text process data.remotes[\"$remote\"].url`
     echo "Configure remote '$remote' ($url)"
  
     #  git remote rm $remote
