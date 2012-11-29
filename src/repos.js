@@ -10,40 +10,41 @@ var repos = {};
 function init() {
 	console.log("checking repos...");
 	getRepositories();
-//	console.log(repos);
 	module.exports = repos;
 }
 
 function getRepositories() {
 	fs.readdirSync(conf_dir).forEach(function (name) {
-//		console.log(name);
 		if (name.match(/^\./))
 			return;
 
-		var repo_dir = repo_base_dir + "/" + name;
 		console.log("initalising repo '" + name + "'");
+
+		var repo_dir = repo_base_dir + "/" + name;
 		var config_file = fs.readFileSync(conf_dir + "/" + name, "UTF-8");
 		var config = JSON.parse(config_file);
-//		console.log(config);
 		var repo = {
 			name : name,
 			config : config,
 			git : new Git({'git-dir' : repo_dir})
 		};
 		repos[name] = repo;
-		repo.refresh = function(callback) {
-			console.log("fetching '" + repo.name + "'");
-			repo.git.exec("fetch", ["--all", "--prune"], function (err, msg) {
-				repo.last_updated = moment().format();
-				getDeployments(repo);
-			});
-		}
+
+		repo.refresh = function() { fetchRepo(repo) };
 		//repo.refresh();
-		getDeployments(repo);
+		getEvents(repo);
 	});
 }
 
-function getDeployments(repo) {
+function fetchRepo(repo) {
+	console.log("fetching '" + repo.name + "'");
+	repo.git.exec("fetch", ["--all", "--prune"], function (err, msg) {
+		repo.last_updated = moment().format();
+		getEvents(repo);
+	});
+}
+
+function getEvents(repo) {
 	repo.git.exec("show-ref", function(err, msg) {
 		var events = [];
 		var lines = msg.split("\n");
@@ -92,7 +93,7 @@ function getDeployments(repo) {
 		    }
 		}
 		repo.events = events;
-	});
+	})
 }
 
 function setCommitDate(repo, event) {
