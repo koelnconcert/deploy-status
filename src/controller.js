@@ -53,7 +53,7 @@ function addRevisionGroups(events) {
 	events.forEach(function(event) {
 		if (!groups[event.revision])
 			groups[event.revision] = ++group;
-		extend(event, { revision_group : group});
+		extend(event, { revision_group : groups[event.revision]});
 	});
 	return events;
 }
