@@ -11,12 +11,12 @@ function init() {
 	var app = express();
 	app.use(connect.logger());
 	app.use(connect.static(__dirname + "/../static"));
+	app.use(redirectIfTrailingSlash); 
 	
 	app.engine('html', consolidate.mustache);
 	app.set('view engine', 'html');
 	app.set('views', __dirname + '/../views')
-//	console.log(app.get('views'));
-	
+
 	app.get('/', controller.index);
 	app.get('/test', controller.test);
 	app.get('/repo/:repo', controller.repo);
@@ -25,8 +25,14 @@ function init() {
 	app.get('/repo/:repo/diff/:rev1/:rev2', controller.diff);
 	
 	app.listen(port);
-//	console.log(app.routes);
 	console.log("server listening on port " + port + ".");
+}
+
+function redirectIfTrailingSlash(req, res, next) {
+	if (req.path.match(".+/$")) 
+		res.redirect(req.path.slice(0,-1));
+	else
+		next();
 }
 
 init();
