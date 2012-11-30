@@ -67,6 +67,7 @@ function addRevisionGroups(events) {
 }
 
 function getEvents(repo, filter) {
+	repo.refresh();
 	var events_new = [];
 	var events = repo.events;
 	if (filter)

@@ -26,21 +26,32 @@ function getRepositories() {
 		var repo = {
 			name : name,
 			config : config,
-			git : new Git({'git-dir' : repo_dir})
+			git : new Git({'git-dir' : repo_dir}),
+			is_fetching : false,
 		};
 		repos[name] = repo;
 
-		repo.refresh = function() { fetchRepo(repo) };
-		//repo.refresh();
-		getEvents(repo);
+		repo.refresh = function() { refreshRepo(repo) };
+		fetchRepo(repo);
 	});
 }
 
+function refreshRepo(repo) {
+	var updated = moment(repo.updated);
+	var now = moment();
+	if (now.diff(updated, 'minutes') >= 5)
+		fetchRepo(repo);
+}
+
 function fetchRepo(repo) {
+	if (repo.is_fetching)
+		return;
 	console.log("fetching '" + repo.name + "'");
+	repo.is_fetching = true;
 	repo.git.exec("fetch", ["--all", "--prune"], function (err, msg) {
 		repo.updated = moment().format();
 		console.log("fetched '" + repo.name + "'");
+		repo.is_fetching = false;
 		getEvents(repo);
 	});
 }
