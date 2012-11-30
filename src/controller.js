@@ -10,11 +10,18 @@ exports.test = function(req, res) {
 
 exports.index = function(req, res) {
 	var repos_model = values(repos).map(function(repo) {
+		var events = getLatestEvents(repo);
+		if (events.length == 0) {
+			events.push({
+				date : moment().format(),
+				type : "no events found",
+			});
+		}
 		return {
 			repo : repo.name,
 			updated_ago : moment(repo.updated).fromNow(),
 			updated : repo.updated,
-			events_latest : getLatestEvents(repo)
+			events_latest : events,
 		}
 	});
 	repos_model.sort(function(a,b) {
@@ -69,7 +76,7 @@ function addRevisionGroups(events) {
 function getEvents(repo, filter) {
 	repo.refresh();
 	var events_new = [];
-	var events = repo.events;
+	var events = repo.events || [];
 	if (filter)
 		events = events.filter(filter);
 	events.forEach(function(event) {
