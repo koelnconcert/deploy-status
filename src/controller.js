@@ -12,6 +12,8 @@ exports.index = function(req, res) {
 	var repos_model = values(repos).map(function(repo) {
 		return {
 			repo : repo.name,
+			updated_ago : moment(repo.updated).fromNow(),
+			updated : repo.updated,
 			events_latest : getLatestEvents(repo)
 		}
 	});
@@ -34,6 +36,8 @@ exports.repo = function(req, res) {
 	
 	var model = {
 		repo : repo_name,
+		updated : repo.updated,
+		updated_ago : moment(repo.updated).fromNow(),
 		remote : remote,
 		events : getEvents(repo, filter),
 		events_latest : getLatestEvents(repo, filter),
@@ -129,7 +133,8 @@ function eventSorter(a,b) {
 }
 
 var global_partials = {
-	event : "views/event.mustache"
+	event : "views/event.mustache",
+	updated : "views/updated.mustache"
 }
 
 

@@ -124,3 +124,10 @@ br {
     border-left: 10px solid #FFAAAA;
 }
 
+.updated {
+    float: right;
+    background-color: #CCCCCC;
+    padding: 5px;
+    margin: 0px 10px 10px 0px;
+    border-radius: 10px;
+}

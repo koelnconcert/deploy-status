@@ -39,7 +39,8 @@ function getRepositories() {
 function fetchRepo(repo) {
 	console.log("fetching '" + repo.name + "'");
 	repo.git.exec("fetch", ["--all", "--prune"], function (err, msg) {
-		repo.last_updated = moment().format();
+		repo.updated = moment().format();
+		console.log("fetched '" + repo.name + "'");
 		getEvents(repo);
 	});
 }
