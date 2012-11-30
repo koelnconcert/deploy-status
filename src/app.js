@@ -9,7 +9,6 @@ function init() {
 	console.log("creating app...");
 
 	var app = express();
-	app.use(connect.logger());
 	app.use(connect.static(__dirname + "/../static"));
 	app.use(redirectIfTrailingSlash); 
 	
