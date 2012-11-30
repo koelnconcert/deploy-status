@@ -1,9 +1,9 @@
 var connect = require('connect');
 var express = require('express');
 var consolidate = require('consolidate');
-var controller = require('./controller');
 
-var port = 8009;
+var settings = require('./settings');
+var controller = require('./controller');
 
 function init() {
 	console.log("creating app...");
@@ -24,8 +24,8 @@ function init() {
 	app.get('/repo/:repo/rev/:rev', controller.rev);
 	app.get('/repo/:repo/diff/:rev1/:rev2', controller.diff);
 	
-	app.listen(port);
-	console.log("server listening on port " + port + ".");
+	app.listen(settings.port);
+	console.log("server listening on port " + settings.port + ".");
 }
 
 function redirectIfTrailingSlash(req, res, next) {

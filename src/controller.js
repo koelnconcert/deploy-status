@@ -1,8 +1,8 @@
 var extend = require("xtend");
 var moment = require("moment");
-var repos = require('./repos');
 
-var base_url = "/node/";
+var settings = require('./settings');
+var repos = require('./repos');
 
 exports.test = function(req, res) {
 	res.json(repos);
@@ -146,7 +146,7 @@ function view(res, view, data) {
 			data.partials = extend({}, global_partials, data.partials || {});
 			res.render(view, data, function(err, html) {
 				res.render("template", {
-					base_url : base_url,
+					base_url : settings.base_url_path,
 					content : html
 				});
 			})
