@@ -120,7 +120,7 @@ exports.diff = function(req, res) {
 	var rev1 = req.params.rev1;
 	var rev2 = req.params.rev2;
 	var model = {
-			repository : repo,
+			repo : repo,
 			rev1 : rev1,
 			rev2 : rev2,
 	};
