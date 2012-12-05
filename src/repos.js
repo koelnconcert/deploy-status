@@ -57,7 +57,7 @@ function fetchRepo(repo) {
 }
 
 function getEvents(repo) {
-	repo.git.exec("show-ref", function(err, msg) {
+	repo.git.exec("show-ref", ["--dereference"], function(err, msg) {
 		var events = [];
 		var lines = msg.split("\n");
 		for (var i = 0; i < lines.length; i++) {
