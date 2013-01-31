@@ -141,8 +141,8 @@ function eventSorter(a,b) {
 }
 
 var global_partials = {
-	event : "views/event.mustache",
-	updated : "views/updated.mustache"
+	event : "event.partial",
+	updated : "updated.partial"
 }
 
 
