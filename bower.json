@@ -1,0 +1,11 @@
+{
+  "name": "deploy-status",
+  "version": "0.0.0",
+  "authors": [
+    "Sebastian Peters <sebastian.peters@tib.uni-hannover.de>"
+  ],
+  "private": true,
+  "dependencies": {
+    "jquery": "1.8.3"
+  }
+}
